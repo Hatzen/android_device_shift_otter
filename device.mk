@@ -80,29 +80,6 @@ PRODUCT_COPY_FILES += \
     frameworks/native/data/etc/android.hardware.bluetooth.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.bluetooth.xml \
     frameworks/native/data/etc/android.hardware.bluetooth_le.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.bluetooth_le.xml
 
-
-# TODO REMOVE more like add..
-# Deaktiviert die Bluetooth-Hintergrundsuche für Standorte standardmäßig
-# ro.bluetooth.ble_scanning_supported=false
-# 
-# # Dateitransfer (OPP) deaktivieren – blockiert das unbefugte Senden von Dateien
-# bluetooth.profile.opp.enabled=false
-# 
-# # Telefonbuch-Zugriff (PBAP) deaktivieren – schützt Kontakte vor dem Auslesen
-# bluetooth.profile.pbap.enabled=false
-# 
-# # SIM-Karten-Zugriff (SAP) deaktivieren
-# bluetooth.profile.sap.enabled=false
-# 
-# # Hörgeräte-Profil (ASHA) deaktivieren, falls nicht benötigt
-# # bluetooth.profile.asha.enabled=false
-# 
-# # Erweitertes Audio-Streaming (LE Audio) deaktivieren, wenn die Hardware es nicht zwingend braucht
-# bluetooth.profile.bap.unicast.client.enabled=false
-# 
-# bluetooth.profile.map.enabled=false
-
-
 # Board API level
 BOARD_SHIPPING_API_LEVEL := 30
 
@@ -152,7 +129,6 @@ PRODUCT_COPY_FILES += \
 PRODUCT_PACKAGES += \
     android.hardware.drm-service.clearkey
 
-# TODO REMOVE
 # e-SIM
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/configs/default-permissions_com.google.android.euicc.xml:$(TARGET_COPY_OUT_PRODUCT)/etc/default-permissions/default-permissions_com.google.android.euicc.xml \
@@ -165,10 +141,9 @@ PRODUCT_COPY_FILES += \
 PRODUCT_PACKAGES += \
     fastbootd
 
-# TODO REMOVE
-# Fingerprint TODO: DO not allow fingerprint as it can be forced?
+# Fingerprint
 PRODUCT_PACKAGES += \
-   android.hardware.biometrics.fingerprint@2.3-service.otter
+    android.hardware.biometrics.fingerprint@2.3-service.otter
 
 PRODUCT_COPY_FILES += \
     frameworks/native/data/etc/android.hardware.fingerprint.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.fingerprint.xml
@@ -257,9 +232,7 @@ $(call soong_config_set_bool,livedisplay_sdm,enable_dm,false)
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/media/media_codecs_performance_yupik_iot.xml:$(TARGET_COPY_OUT_VENDOR)/etc/media_codecs_performance_yupik_iot.xml \
     $(LOCAL_PATH)/media/media_codecs_yupik_iot.xml:$(TARGET_COPY_OUT_VENDOR)/etc/media_codecs_yupik_iot.xml \
-    $(LOCAL_PATH)/media/media_profiles_yupik_iot.xml:$(TARGET_COPY_OUT_VENDOR)/etc/media_profiles_vendor.xml \
-    $(LOCAL_PATH)/media/bootanimation.zip:$(TARGET_COPY_OUT_PRODUCT)/media/bootanimation.zip
-    # alternative: $(LOCAL_PATH)/media/bootanimation.zip:$(TARGET_COPY_OUT_SYSTEM)/media/bootanimation.zip
+    $(LOCAL_PATH)/media/media_profiles_yupik_iot.xml:$(TARGET_COPY_OUT_VENDOR)/etc/media_profiles_vendor.xml
 
 $(call soong_config_set_bool,stagefright,target_disable_thumbnail_block_model,true)
 
@@ -281,6 +254,7 @@ PRODUCT_COPY_FILES += \
 PRODUCT_ENFORCE_RRO_TARGETS := *
 PRODUCT_PACKAGES += \
     ApertureOverlayOtter \
+    CarrierConfigResCommon \
     FrameworksResCommon \
     FrameworksResTarget \
     LineageSdkOverlayOtter \
@@ -289,15 +263,9 @@ PRODUCT_PACKAGES += \
     SettingsResCommon \
     SystemUIResCommon \
     SystemUIResTarget \
-    CarrierConfigResCommon \
     TelephonyResCommon \
     WifiResCommon \
     WifiResTarget
-    
-    # CarrierConfigResCommon \ # TODO REMOVE
-    # TelephonyResCommon \
-    # WifiResCommon \
-    # WifiResTarget
 
 # Partitions
 PRODUCT_PACKAGES += \
@@ -412,8 +380,7 @@ PRODUCT_PACKAGES += \
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/vibrator/excluded-input-devices.xml:$(TARGET_COPY_OUT_VENDOR)/etc/excluded-input-devices.xml
 
-# TODO REMOVE
-# Disable WiFi
+# WiFi
 PRODUCT_PACKAGES += \
     android.hardware.wifi-service \
     hostapd \
@@ -430,86 +397,11 @@ PRODUCT_COPY_FILES += \
     frameworks/native/data/etc/android.hardware.wifi.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.wifi.xml \
     frameworks/native/data/etc/android.software.ipsec_tunnel_migration.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.software.ipsec_tunnel_migration.xml \
     frameworks/native/data/etc/android.software.ipsec_tunnels.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.software.ipsec_tunnels.xml
-#
-## WiFi firmware symlink
+
+# WiFi firmware symlink
 PRODUCT_PACKAGES += \
     firmware_WCNSS_qcom_cfg.ini_symlink \
     firmware_wlan_mac.bin_symlink
-# TODO REMOVE
-
-
-# FancyLauncher (KISS) is configured as an alternative launcher alongside the
-# LineageOS default launcher. The user can choose between them in Settings.
-# CustomOtterControl requires platform signing for MASTER_CLEAR and
-# BIND_ACCESSIBILITY_SERVICE permissions (factory reset + AccessibilityService).
-
-PRODUCT_PACKAGES += \
-    Alibi \
-    Briar \
-    Backup \
-    CustomOtterControl \
-    FancyLauncher \
-    Files \
-    LLM \
-    Maps \
-    Office \
-    Parannoying \
-    KernelSU \
-    Stepsy \
-    Terminal \
-    VLC \
-    Wiki
-
-# Reduce load on system partion
-    # Insular \
-    # Kernel \
-    # KernelSU \
-    # LinuxWiki \
-    # SkyMap \
-
-# DONT WORK as other products
-#    Maps \#
-#    Parannoying \
-#    VLC \
-#    Files \ 
-#    KernelSU \
-
-#
-#PRODUCT_COPY_FILES += \
-#    $(LOCAL_PATH)/prebuilts/anonymousplanet.org_en_all_2026-05.zim:$(TARGET_COPY_OUT_PRODUCT)/media/kiwix/anonymousplanet.org_en_all_2026-05.zim
-
-# Component Override für Netzwerksperre kopieren
-PRODUCT_COPY_FILES += \
-    device/shift/otter/component-override.xml:$(TARGET_COPY_OUT_PRODUCT)/etc/sysconfig/component-override.xml
-
-# Das Hintergrund-Kopierskript nach /vendor/bin/ bringen
-PRODUCT_COPY_FILES += \
-    device/shift/otter/copy_assets.sh:$(TARGET_COPY_OUT_VENDOR)/bin/copy_assets.sh
-
-# Deine Kiwix ZIM-Datei in den Product-Speicher einbetten
-PRODUCT_COPY_FILES += \
-    $(LOCAL_PATH)/prebuilts/anonymousplanet.org_en_all_2026-05.zim:$(TARGET_COPY_OUT_PRODUCT)/media/kiwix/anonymousplanet.org_en_all_2026-05.zim
-
-
-PRODUCT_COPY_FILES += \
-    $(LOCAL_PATH)/privapp-permissions-otter.xml:$(TARGET_COPY_OUT_PRODUCT)/etc/permissions/privapp-permissions-otter.xml
-
-PRODUCT_COPY_FILES += \
-    $(LOCAL_PATH)/default-permissions-kiwix.xml:$(TARGET_COPY_OUT_PRODUCT)/etc/default-permissions/default-permissions-kiwix.xml
-
-#PRODUCT_PACKAGES -= \
-#    LineageSetupWizard
-
-# TODO Remove doesnt seem to work
-#PRODUCT_COPY_FILES += \
-#    device/shift/otter/media/background.png:$(TARGET_COPY_OUT_SYSTEM)/framework/default_wallpaper.png
-
-#PRODUCT_COPY_FILES += \
-#    device/shift/otter/media/background.png:$(TARGET_COPY_OUT_SYSTEM)/framework/default_wallpaper.png
-# vendor/lineage/overlay/common/frameworks/base/core/res/res/drawable-nodpi/default_wallpaper.png
-PRODUCT_PACKAGE_OVERLAYS += \
-    device/shift/otter/bto-overlay
-DEVICE_PACKAGE_OVERLAYS += device/shift/otter/bto-overlay
 
 # Inherit from the proprietary files makefile.
 $(call inherit-product, vendor/shift/otter/otter-vendor.mk)

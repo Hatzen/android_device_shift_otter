@@ -1,1 +1,0 @@
-https://github.com/nvllz/stepsy/releases/tag/1.6.2
