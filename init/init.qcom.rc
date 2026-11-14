@@ -487,7 +487,6 @@ service qcom-c_main-sh /vendor/bin/init.class_main.sh
 
 on property:vold.decrypt=trigger_restart_framework
     start qcom-c_main-sh
-    start wcnss-service
 
 service vendor.qrtr-ns /vendor/bin/qrtr-ns -f
     class core
@@ -542,6 +541,7 @@ service cnss-daemon /system/vendor/bin/cnss-daemon -n -l
     user system
     group system inet net_admin wifi
     capabilities NET_ADMIN
+    disabled
 
 on property:sys.shutdown.requested=*
     write /sys/kernel/shutdown_wlan/shutdown 1

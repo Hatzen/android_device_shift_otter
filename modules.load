@@ -79,7 +79,3 @@ va_macro_dlkm.ko
 wsa883x_dlkm.ko
 mxl5005s.ko
 max2165.ko
-rmnet_core.ko
-rmnet_ctl.ko
-rmnet_offload.ko
-rmnet_shs.ko

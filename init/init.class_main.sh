@@ -43,6 +43,14 @@ case "$baseband" in
     stop vendor.qcrild
 esac
 
+noril=`getprop ro.vendor.radio.noril`
+if [ "$noril" = "yes" ] || [ "$noril" = "true" ] || [ "$noril" = "1" ]; then
+    stop vendor.ril-daemon
+    stop vendor.qcrild
+    stop vendor.qcrild2
+    exit 0
+fi
+
 case "$baseband" in
     "msm" | "csfb" | "svlte2a" | "mdm" | "mdm2" | "sglte" | "sglte2" | "dsda2" | "unknown" | "dsda3" | "sdm" | "sdx" | "sm6")
 

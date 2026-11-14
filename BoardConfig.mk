@@ -90,6 +90,26 @@ BOARD_KERNEL_CMDLINE := \
 BOARD_KERNEL_IMAGE_NAME := Image
 BOARD_KERNEL_SEPARATED_DTBO := true
 TARGET_KERNEL_CONFIG := vendor/lahaina-qgki_defconfig vendor/otter.config
+
+# Boot animation
+TARGET_BOOTANIMATION := vendor/vaultos/media/bootanimation.zip
+
+# KernelSU Root Support (Default: true)
+# Set WITH_KSU := false in the environment or build command to build without root
+WITH_KSU ?= true
+ifeq ($(WITH_KSU),true)
+TARGET_KERNEL_CONFIG += vendor/ksu.config
+else
+TARGET_KERNEL_CONFIG += vendor/no-ksu.config
+endif
+
+# VaultOs USB Debug Flag (Default: false -> USB controller hardware-disabled in kernel & DT)
+# Set WITH_USB_DEBUG := true to build a developer boot/vendor_boot image with USB enabled
+WITH_USB_DEBUG ?= false
+ifeq ($(WITH_USB_DEBUG),true)
+TARGET_KERNEL_CONFIG += vendor/usb_debug.config
+endif
+
 TARGET_KERNEL_NO_GCC := true
 TARGET_KERNEL_SOURCE := kernel/shift/qcm6490
 

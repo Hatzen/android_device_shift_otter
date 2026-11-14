@@ -85,6 +85,10 @@ blocklist vmw_vsock_virtio_transport_common
 blocklist vsock_diag
 blocklist vsock
 blocklist qca_cld3_wlan
+blocklist rmnet_core
+blocklist rmnet_ctl
+blocklist rmnet_offload
+blocklist rmnet_shs
 blocklist torture
 blocklist locktorture
 blocklist rcutorture
