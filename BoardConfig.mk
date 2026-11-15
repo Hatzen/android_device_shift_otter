@@ -173,15 +173,22 @@ VENDOR_SECURITY_PATCH := $(BOOT_SECURITY_PATCH)
 include device/qcom/sepolicy_vndr/SEPolicy.mk
 BOARD_VENDOR_SEPOLICY_DIRS += $(DEVICE_PATH)/sepolicy/vendor
 
-# Verified Boot
+# Verified Boot (Default: WITH_AVB := true so production builds support locked bootloaders)
 BOARD_AVB_ENABLE := true
+WITH_AVB ?= true
+AVB_CUSTOM_ALGORITHM ?= SHA256_RSA4096
 
 ifneq (,$(AVB_CUSTOM_KEY_PATH))
 BOARD_AVB_ALGORITHM := $(AVB_CUSTOM_ALGORITHM)
 BOARD_AVB_KEY_PATH := $(AVB_CUSTOM_KEY_PATH)
+else ifneq (,$(wildcard vendor/vaultos/security/avb_custom_key.pem))
+AVB_CUSTOM_KEY_PATH := vendor/vaultos/security/avb_custom_key.pem
+BOARD_AVB_ALGORITHM := $(AVB_CUSTOM_ALGORITHM)
+BOARD_AVB_KEY_PATH := $(AVB_CUSTOM_KEY_PATH)
 else
-AVB_CUSTOM_ALGORITHM := SHA256_RSA4096
 AVB_CUSTOM_KEY_PATH := external/avb/test/data/testkey_rsa4096.pem
+BOARD_AVB_ALGORITHM := $(AVB_CUSTOM_ALGORITHM)
+BOARD_AVB_KEY_PATH := $(AVB_CUSTOM_KEY_PATH)
 endif
 
 ifneq ($(WITH_AVB),true)
