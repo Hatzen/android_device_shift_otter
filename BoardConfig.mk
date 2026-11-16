@@ -173,6 +173,10 @@ VENDOR_SECURITY_PATCH := $(BOOT_SECURITY_PATCH)
 include device/qcom/sepolicy_vndr/SEPolicy.mk
 BOARD_VENDOR_SEPOLICY_DIRS += $(DEVICE_PATH)/sepolicy/vendor
 
+ifneq ($(wildcard vendor/vaultos/sepolicy/private),)
+PRODUCT_PRIVATE_SEPOLICY_DIRS += vendor/vaultos/sepolicy/private
+endif
+
 # Verified Boot (Default: WITH_AVB := true so production builds support locked bootloaders)
 BOARD_AVB_ENABLE := true
 WITH_AVB ?= true
