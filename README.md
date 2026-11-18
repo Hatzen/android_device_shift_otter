@@ -42,7 +42,7 @@ https://github.com/Hatzen/android_kernel_shift_qcm6490)
 - Utilisation of the Custom Key, to extract all text from screen and copy it to clipboard
 - offline wiki via Kiwix
 - Full office suite e.g. Libreoffice
-- Offline Maps and GPS
+- Offline Maps via Organic Maps (internal QCM6490 GPS is intentionally disabled alongside the cellular modem — see `vaultos-concept` ADR 006)
 - Root and Terminal via KernelSU and Termux
 - Backups via Neobackup
 - Movie Support via VLC

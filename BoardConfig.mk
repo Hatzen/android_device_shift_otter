@@ -221,8 +221,5 @@ WIFI_HIDL_FEATURE_DUAL_INTERFACE := true
 WIFI_HIDL_UNIFIED_SUPPLICANT_SERVICE_RC_ENTRY := true
 WPA_SUPPLICANT_VERSION := VER_0_8_X
 
-# Disable selinux to test if realm issue in /tmp/ permission denied gets resolved
-BOARD_KERNEL_CMDLINE += androidboot.selinux=permissive
-
 # Inherit the proprietary files
 include vendor/shift/otter/BoardConfigVendor.mk
