@@ -161,9 +161,6 @@ persist.vendor.data.mode=concurrent
 # OEM Unlock
 ro.oem_unlock_supported=1
 
-# TODO: remove
-ro.adb.secure=0
-
 # Perf
 ro.vendor.extension_library=libqti-perfd-client.so
 
@@ -174,7 +171,6 @@ persist.vendor.qteeconnector.retrying_timeout=2000
 # Radio (VaultOs Air-Gap: no RIL / Telephony to save battery & eliminate baseband polling)
 ro.radio.noril=yes
 ro.vendor.radio.noril=yes
-config.disable_telephony=true
 ro.telephony.sim_slots.count=0
 persist.vendor.radio.noril=1
 persist.radio.multisim.config=dsds
